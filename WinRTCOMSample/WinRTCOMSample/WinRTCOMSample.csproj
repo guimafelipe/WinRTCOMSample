@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+	<UseWinUI>true</UseWinUI>
+    <OutputType>WinExe</OutputType>
+	<Platforms>x64;ARM64</Platforms>
+	<SelfContained>true</SelfContained>
+	<RootNamespace>WinRTCOMSample</RootNamespace>
+	<ApplicationManifest>app.manifest</ApplicationManifest>
+	<TargetFramework>net9.0-windows10.0.26100.0</TargetFramework>
+    <RuntimeIdentifiers>win-x64;win-arm64</RuntimeIdentifiers>
+	<CsWinRTIncludes>WinRTCOMServer</CsWinRTIncludes>
+	<CsWinRTWindowsMetadata>10.0.26100.0</CsWinRTWindowsMetadata>
+	<WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
+	<AssetTargetFallback>net9.0-windows$(TargetPlatformVersion);$(AssetTargetFallback)</AssetTargetFallback>
+  </PropertyGroup>
+  <PropertyGroup Label="Optimization">
+	<TieredPGO>true</TieredPGO>
+	<TieredCompilation>true</TieredCompilation>
+	<TieredCompilationQuickJit>true</TieredCompilationQuickJit>
+	<TieredCompilationQuickJitForLoops>true</TieredCompilationQuickJitForLoops>
+	<PublishReadyToRun Condition="'$(Configuration)' == 'Release'">true</PublishReadyToRun>
+	<PublishReadyToRunComposite Condition="'$(Configuration)' == 'Release'">true</PublishReadyToRunComposite>
+  </PropertyGroup>
+  <ItemGroup>
+    <Manifest Include="$(ApplicationManifest)" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.6584" />
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.8.251003001" />
+	<PackageReference Include="Microsoft.Windows.CsWinRT" Version="2.2.0">
+	  <PrivateAssets>all</PrivateAssets>
+	  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	</PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+	<Content Include="..\WinRTCOMServer\bin\$(Platform)\$(Configuration)\$(TargetFramework)\win-$(Platform)\WinRTCOMServer.winmd">
+	  <Visible>false</Visible>
+	  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+  </ItemGroup>
+  <ItemGroup>
+	<CsWinRTInputs Include="..\WinRTCOMServer\bin\$(Platform)\$(Configuration)\$(TargetFramework)\win-$(Platform)\WinRTCOMServer.winmd">
+	  <IsWinMDFile>true</IsWinMDFile>
+	</CsWinRTInputs>
+  </ItemGroup>
+</Project>

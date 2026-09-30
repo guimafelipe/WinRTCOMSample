@@ -14,8 +14,8 @@ remains at the package root so the WinUI client can generate and use the CsWinRT
 
 > [!NOTE]
 > `PackageSubfolder` is currently under review in Microsoft.Windows.SDK.BuildTools.MSIX. The package
-> version in this branch identifies the validation build and must be updated to the first published
-> version containing that feature.
+> version in this branch identifies successful validation build `159108967` and must be updated to
+> the first published version containing that feature.
 
 Build the WinUI project directly:
 

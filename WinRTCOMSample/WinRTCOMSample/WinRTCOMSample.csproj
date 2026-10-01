@@ -11,6 +11,10 @@
 	<CsWinRTIncludes>WinRTCOMServer</CsWinRTIncludes>
 	<CsWinRTWindowsMetadata>10.0.26100.0</CsWinRTWindowsMetadata>
 	<WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
+	<WindowsPackageType>MSIX</WindowsPackageType>
+	<EnableMsixTooling>true</EnableMsixTooling>
+	<AppxBundle>Never</AppxBundle>
+	<AppxPackageSigningEnabled>false</AppxPackageSigningEnabled>
 	<AssetTargetFallback>net9.0-windows$(TargetPlatformVersion);$(AssetTargetFallback)</AssetTargetFallback>
   </PropertyGroup>
   <PropertyGroup Label="Optimization">
@@ -26,11 +30,17 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.6584" />
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools.MSIX" Version="1.7.261001101" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.8.251003001" />
 	<PackageReference Include="Microsoft.Windows.CsWinRT" Version="2.2.0">
 	  <PrivateAssets>all</PrivateAssets>
 	  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 	</PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+	<ProjectReference Include="..\WinRTCOMServer\WinRTCOMServer.csproj">
+	  <PackageSubfolder>WinRTCOMServer</PackageSubfolder>
+	</ProjectReference>
   </ItemGroup>
   <ItemGroup>
 	<Content Include="..\WinRTCOMServer\bin\$(Platform)\$(Configuration)\$(TargetFramework)\win-$(Platform)\WinRTCOMServer.winmd">
@@ -42,5 +52,13 @@
 	<CsWinRTInputs Include="..\WinRTCOMServer\bin\$(Platform)\$(Configuration)\$(TargetFramework)\win-$(Platform)\WinRTCOMServer.winmd">
 	  <IsWinMDFile>true</IsWinMDFile>
 	</CsWinRTInputs>
+  </ItemGroup>
+  <ItemGroup>
+	<AppxManifest Include="Package.appxmanifest">
+	  <SubType>Designer</SubType>
+	</AppxManifest>
+	<Content Include="Images\*.png">
+	  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
   </ItemGroup>
 </Project>
